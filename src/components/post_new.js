@@ -24,10 +24,14 @@ class PostsNew extends Component {
     }
 
     onSubmit( values ) {
-        this.props.createPost( values )
+        this.props.createPost( values, ()=>{
+           this.props.history.push('/');
+        });
     }
 
     render() {
+        //handleSubmit is resposible fo redux-form side of thinks(like validation and stuff), when onSubmit is resposible for posting data as values to server,
+        // witch needs to be binded because it will be called outside off the components context
         const { handleSubmit } = this.props;
         return (
             <form onSubmit={ handleSubmit( this.onSubmit.bind( this ) ) }>
